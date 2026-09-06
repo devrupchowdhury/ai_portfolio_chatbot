@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DEVRUP CHOWDHURY</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =========================
+           ROOT VARIABLES
+        ========================= */
+
+        :root {
+            --bg: #07070d;
+            --bg-secondary: #0b0b13;
+            --sidebar: #0a0a12;
+
+            --surface: #11111b;
+            --surface-light: #161622;
+
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.16);
+
+            --text: #f5f5ff;
+            --text-secondary: #a7a7b8;
+            --text-muted: #666678;
+
+            --purple: #7c5cff;
+            --purple-dark: #563bd0;
+            --purple-light: #9d87ff;
+
+            --cyan: #22d3ee;
+            --pink: #ec4899;
+            --green: #22c55e;
+
+            --gradient: linear-gradient(
+                135deg,
+                #7c5cff,
+                #22d3ee
+            );
+
+            --display: "Poppins", sans-serif;
+            --sans: "Inter", sans-serif;
+        }
+
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           ANIMATED BACKGROUND
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            top: -180px;
+            left: 250px;
+
+            background: rgba(124, 92, 255, 0.16);
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            pointer-events: none;
+
+            animation: glowMove 10s ease-in-out infinite alternate;
+
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            right: -150px;
+            bottom: -120px;
+
+            background: rgba(34, 211, 238, 0.12);
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            pointer-events: none;
+
+            animation: glowMove2 12s ease-in-out infinite alternate;
+
+            z-index: -2;
+        }
+
+        @keyframes glowMove {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(100px, 80px);
+            }
+
+        }
+
+        @keyframes glowMove2 {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-100px, -80px);
+            }
+
+        }
+
+
+        /* =========================
+           APP
+        ========================= */
+
+        #app {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            background:
+                radial-gradient(
+                    circle at 70% 30%,
+                    rgba(124, 92, 255, 0.05),
+                    transparent 35%
+                );
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        #sidebar {
+            width: 280px;
+            min-width: 280px;
+
+            height: 100%;
+
+            background: var(--sidebar);
+
+            border-right: 1px solid var(--border);
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 22px 18px;
+        }
+
+
+        /* Brand */
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 30px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--gradient);
+
+            box-shadow:
+                0 0 25px rgba(124, 92, 255, 0.25);
+
+            font-family: var(--display);
+            font-weight: 700;
+
+            color: white;
+        }
+
+        .brand-text {
+            font-family: var(--display);
+
+            font-size: 17px;
+            font-weight: 600;
+
+            letter-spacing: -0.3px;
+        }
+
+        .brand-sub {
+            font-size: 10px;
+
+            color: var(--text-muted);
+
+            margin-top: 2px;
+        }
+
+
+        /* New Chat */
+
+        #new-chat {
+            width: 100%;
+
+            border: 1px solid var(--border);
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            border-radius: 11px;
+
+            padding: 12px;
+
+            cursor: pointer;
+
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 500;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            transition: 0.25s ease;
+        }
+
+        #new-chat:hover {
+            background: var(--surface-light);
+
+            border-color: var(--border-hover);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* Section */
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 12px;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.3px;
+
+            color: var(--text-muted);
+        }
+
+
+        /* Suggestions */
+
+        .suggestions {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .chip {
+            border: 1px solid transparent;
+
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            text-align: left;
+
+            padding: 10px 11px;
+
+            border-radius: 9px;
+
+            font-family: var(--sans);
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .chip:hover {
+            background: var(--surface);
+
+            color: var(--text);
+
+            border-color: var(--border);
+        }
+
+
+        /* =========================
+           SIDEBAR FOOTER
+        ========================= */
+
+        .sidebar-footer {
+            margin-top: auto;
+        }
+
+        .online {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            margin-bottom: 14px;
+        }
+
+        .online-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 10px rgba(34, 197, 94, 0.6);
+        }
+
+
+        /* Social Links */
+
+        .social-links {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 10px 8px;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border);
+
+            background: #10101a;
+
+            color: var(--text-secondary);
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            transition: all 0.25s ease;
+        }
+
+        .social-btn i {
+            font-size: 16px;
+        }
+
+        .social-btn:hover {
+            color: white;
+
+            background: #181823;
+
+            border-color: var(--border-hover);
+
+            transform: translateY(-2px);
+        }
+
+        .social-btn.linkedin:hover {
+            border-color: rgba(10, 102, 194, 0.6);
+
+            box-shadow:
+                0 8px 20px rgba(10, 102, 194, 0.15);
+        }
+
+        .social-btn.github:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+
+            box-shadow:
+                0 8px 20px rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        #main {
+            flex: 1;
+
+            min-width: 0;
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            height: 70px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 26px;
+
+            background: rgba(7, 7, 13, 0.95);
+        }
+
+        .top-title {
+            font-family: var(--display);
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }
+
+        .top-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 10px rgba(34, 211, 238, 0.7);
+        }
+
+
+        /* =========================
+           CHAT AREA
+        ========================= */
+
+        #chat-scroll {
+            flex: 1;
+
+            overflow-y: auto;
+
+            scroll-behavior: smooth;
+        }
+
+        #chat-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        #chat-scroll::-webkit-scrollbar-thumb {
+            background: #242433;
+
+            border-radius: 20px;
+        }
+
+        #chat-inner {
+            width: min(900px, 100%);
+
+            margin: 0 auto;
+
+            padding: 40px 24px 120px;
+        }
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        #empty-state {
+            min-height: calc(100vh - 200px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            animation: fadeUp 0.7s ease;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* Hero Icon */
+
+        .hero-icon {
+            width: 78px;
+            height: 78px;
+
+            border-radius: 25px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--gradient);
+
+            font-size: 28px;
+
+            box-shadow:
+                0 0 50px rgba(124, 92, 255, 0.25);
+
+            margin-bottom: 25px;
+
+            animation: heroFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+
+        }
+
+
+        /* Hero Text */
+
+        #empty-state h1 {
+            font-family: var(--display);
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #9d87ff,
+                    #22d3ee,
+                    #ffffff
+                );
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation: textGradient 6s linear infinite;
+        }
+
+        @keyframes textGradient {
+
+            from {
+                background-position: 0%;
+            }
+
+            to {
+                background-position: 300%;
+            }
+
+        }
+
+        #empty-state p {
+            max-width: 600px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* Hero Tags */
+
+        .hero-tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 8px;
+        }
+
+        .hero-tag {
+            padding: 7px 12px;
+
+            border-radius: 30px;
+
+            background: #10101a;
+
+            border: 1px solid var(--border);
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           CHAT MESSAGES
+        ========================= */
+
+        .msg-row {
+            display: flex;
+
+            margin-bottom: 22px;
+
+            animation: fadeUp 0.3s ease;
+        }
+
+        .msg-row.user {
+            justify-content: flex-end;
+        }
+
+        .msg-row.ai {
+            justify-content: flex-start;
+        }
+
+        .bubble {
+            max-width: 75%;
+
+            padding: 13px 16px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+
+            white-space: pre-wrap;
+
+            word-wrap: break-word;
+        }
+.thinking-bubble {
+    background: #11111b;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--cyan);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    display: inline-flex !important;
+    align-items: center;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    height: auto !important;
+    padding: 10px 14px !important;
+    align-self: flex-start;
+}
+
+
+        /* User */
+
+        .msg-row.user .bubble {
+            background: var(--gradient);
+
+            color: white;
+
+            border-bottom-right-radius: 4px;
+
+            box-shadow:
+                0 8px 25px rgba(124, 92, 255, 0.18);
+        }
+
+
+        /* AI */
+
+        .msg-row.ai .bubble {
+            background: #11111b;
+
+            border: 1px solid var(--border);
+
+            border-left: 2px solid var(--cyan);
+
+            color: #dddded;
+
+            border-bottom-left-radius: 4px;
+        }
+
+
+        /* Error */
+
+        .msg-row.ai .bubble.error {
+            border-left-color: #ef4444;
+
+            color: #fca5a5;
+        }
+
+
+        /* =========================
+           THINKING
+        ========================= */
+
+        .thinking-wrap {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .thinking-text {
+            color: var(--text-muted);
+
+            font-size: 10px;
+        }
+
+
+        .thinking-dots {
+            display: flex;
+
+            gap: 4px;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: var(--purple-light);
+
+            animation: thinking 1.2s infinite ease-in-out;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes thinking {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+
+                opacity: 0.3;
+            }
+
+            40% {
+                transform: translateY(-4px);
+
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================
+           COMPOSER
+        ========================= */
+
+        .composer-wrap {
+            position: fixed;
+
+            left: 280px;
+            right: 0;
+            bottom: 0;
+
+            padding: 15px 24px 20px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #07070d 65%,
+                    transparent
+                );
+        }
+
+        .composer {
+            width: min(900px, 100%);
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 10px;
+
+            background: #11111b;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 9px;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .composer:focus-within {
+            border-color: rgba(124, 92, 255, 0.45);
+
+            box-shadow:
+                0 0 0 3px rgba(124, 92, 255, 0.06),
+                0 15px 50px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* Input */
+
+        #question-input {
+            flex: 1;
+
+            min-height: 42px;
+            max-height: 140px;
+
+            resize: none;
+
+            overflow-y: auto;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-family: var(--sans);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            padding: 11px 10px;
+        }
+
+        #question-input::placeholder {
+            color: var(--text-muted);
+        }
+
+
+        /* Send */
+
+        #send-btn {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: var(--gradient);
+
+            color: white;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+
+            transition: 0.2s ease;
+
+            box-shadow:
+                0 7px 20px rgba(124, 92, 255, 0.2);
+        }
+
+        #send-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(124, 92, 255, 0.3);
+        }
+
+        #send-btn:active {
+            transform: scale(0.96);
+        }
+
+        #send-btn:disabled {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* Composer hint */
+
+        .composer-hint {
+            width: min(900px, 100%);
+
+            margin: 8px auto 0;
+
+            text-align: center;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            #sidebar {
+                display: none;
+            }
+
+            .composer-wrap {
+                left: 0;
+
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .topbar {
+                padding: 0 16px;
+            }
+
+            #chat-inner {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .bubble {
+                max-width: 88%;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .top-status {
+                display: none;
+            }
+
+            #empty-state h1 {
+                font-size: 29px;
+            }
+
+            #empty-state p {
+                font-size: 12px;
+            }
+
+            .hero-icon {
+                width: 65px;
+                height: 65px;
+
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div id="app">
+
+
+        <!-- =========================
+             SIDEBAR
+        ========================= -->
+
+        <aside id="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    D
+                </div>
+
+                <div>
+                    <div class="brand-text">
+                        Devrup Chowdhury
+                        
+              
+                    </div>
+
+                    <div class="brand-sub">
+                        Portfolio Assistant
+                    </div>
+                </div>
+
+            </div>
+
+
+            <button id="new-chat">
+
+                <i class="fa-solid fa-plus"></i>
+
+                New conversation
+
+            </button>
+
+
+            <div class="section-title">
+                Quick questions
+            </div>
+
+
+            <div class="suggestions">
+
+                <button class="chip">
+                    What have they worked on recently?
+                </button>
+
+                <button class="chip">
+                    What are their core technical skills?
+                </button>
+
+                <button class="chip">
+                    Tell me about their education.
+                </button>
+
+                <button class="chip">
+                    Tell me about their projects.
+                </button>
+
+                <button class="chip">
+                    What technologies do they work with?
+                </button>
+
+            </div>
+
+
+            <!-- Sidebar Footer -->
+
+            <div class="sidebar-footer">
+
+                <div class="online">
+
+                    <span class="online-dot"></span>
+
+                    AI assistant online
+
+                </div>
+
+
+                <div class="social-links">
+
+
+                    <!-- LinkedIn -->
+
+                    <a
+                        href="https://www.linkedin.com/in/devrup-chowdhury-264998202/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn linkedin"
+                        aria-label="Open LinkedIn profile"
+                    >
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                        <span>
+                            LinkedIn
+                        </span>
+
+                    </a>
+
+
+                    <!-- GitHub -->
+
+                    <a
+                        href="https://github.com/devrupchowdhury"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-btn github"
+                        aria-label="Open GitHub profile"
+                    >
+
+                        <i class="fa-brands fa-github"></i>
+
+                        <span>
+                            GitHub
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN
+        ========================= -->
+
+        <main id="main">
+
+
+            <!-- Topbar -->
+
+            <header class="topbar">
+
+                <div class="top-title">
+                    Devrup AI
+                </div>
+
+                <div class="top-status">
+
+                    <span class="status-dot"></span>
+
+                    Resume knowledge active
+
+                </div>
+
+            </header>
+
+
+            <!-- Chat -->
+
+            <div id="chat-scroll">
+
+                <div id="chat-inner">
+
+
+                    <!-- Empty State -->
+
+                    <div id="empty-state">
+
+                        <div class="hero-icon">
+
+                            <i class="fa-solid fa-sparkles"></i>
+
+                        </div>
+
+
+                        <h1>
+                            Ask me about Devrup
+                        </h1>
+
+
+                        <p>
+                            An AI-powered portfolio assistant that can answer
+                            questions about my education, technical skills,
+                            projects and experience.
+                        </p>
+
+
+                        <div class="hero-tags">
+
+                            <span class="hero-tag">
+                                Python
+                            </span>
+
+                            <span class="hero-tag">
+                                AI / ML
+                            </span>
+
+                            <span class="hero-tag">
+                                FastAPI
+                            </span>
+
+                            <span class="hero-tag">
+                                C++
+                            </span>
+
+                            <span class="hero-tag">
+                                Web Development
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 COMPOSER
+            ========================= -->
+
+            <div class="composer-wrap">
+
+                <form id="composer" class="composer">
+
+                    <textarea
+                        id="question-input"
+                        rows="1"
+                        maxlength="500"
+                        placeholder="Ask something about Devrup..."
+                    ></textarea>
+
+
+                    <button
+                        id="send-btn"
+                        type="submit"
+                        aria-label="Send message"
+                    >
+
+                        <i class="fa-solid fa-arrow-up"></i>
+
+                    </button>
+
+                </form>
+
+
+                <div class="composer-hint">
+
+                    Devrup AI answers using information from the portfolio.
+
+                </div>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        (() => {
+
+            const API_BASE_URL = "http://localhost:8000";
+
+
+            const chatInner =
+                document.getElementById("chat-inner");
+
+            const emptyState =
+                document.getElementById("empty-state");
+
+            const chatScroll =
+                document.getElementById("chat-scroll");
+
+            const form =
+                document.getElementById("composer");
+
+            const input =
+                document.getElementById("question-input");
+
+            const sendBtn =
+                document.getElementById("send-btn");
+
+            const newChatBtn =
+                document.getElementById("new-chat");
+
+
+            /* =========================
+               AUTO RESIZE TEXTAREA
+            ========================= */
+
+            function autoResize() {
+
+                input.style.height = "auto";
+
+                input.style.height =
+                    Math.min(
+                        input.scrollHeight,
+                        140
+                    ) + "px";
+
+            }
+
+            input.addEventListener(
+                "input",
+                autoResize
+            );
+
+
+            /* =========================
+               ENTER TO SEND
+            ========================= */
+
+            input.addEventListener(
+                "keydown",
+                (event) => {
+
+                    if (
+                        event.key === "Enter" &&
+                        !event.shiftKey
+                    ) {
+
+                        event.preventDefault();
+
+                        form.requestSubmit();
+
+                    }
+
+                }
+            );
+
+
+            /* =========================
+               QUICK QUESTIONS
+            ========================= */
+
+            document
+                .querySelectorAll(".chip")
+                .forEach((chip) => {
+
+                    chip.addEventListener(
+                        "click",
+                        () => {
+
+                            input.value =
+                                chip.textContent.trim();
+
+                            autoResize();
+
+                            form.requestSubmit();
+
+                        }
+                    );
+
+                });
+
+
+            /* =========================
+               NEW CHAT
+            ========================= */
+
+            newChatBtn.addEventListener(
+                "click",
+                () => {
+
+                    chatInner.innerHTML = "";
+
+                    chatInner.appendChild(
+                        emptyState
+                    );
+
+                    input.value = "";
+
+                    autoResize();
+
+                    input.focus();
+
+                }
+            );
+
+
+            /* =========================
+               SCROLL TO BOTTOM
+            ========================= */
+
+            function scrollToBottom() {
+
+                requestAnimationFrame(() => {
+
+                    chatScroll.scrollTop =
+                        chatScroll.scrollHeight;
+
+                });
+
+            }
+
+
+            /* =========================
+               ADD MESSAGE
+            ========================= */
+
+            function addRow(
+                text,
+                role,
+                kind = ""
+            ) {
+
+                const row =
+                    document.createElement("div");
+
+                row.className =
+                    `msg-row ${role}`;
+
+
+                const bubble =
+                    document.createElement("div");
+
+                bubble.className =
+                    `bubble ${kind}`;
+
+
+                /*
+                 * textContent is intentionally used.
+                 *
+                 * This prevents model output from
+                 * injecting HTML into the page.
+                 */
+
+                bubble.textContent = text;
+
+
+                row.appendChild(bubble);
+
+                chatInner.appendChild(row);
+
+
+                scrollToBottom();
+
+
+                return row;
+
+            }
+
+
+            /* =========================
+               THINKING ANIMATION
+            ========================= */
+
+            function addThinking() {
+
+                const row =
+                    document.createElement("div");
+
+                row.className =
+                    "msg-row ai";
+
+
+                const bubble =
+                    document.createElement("div");
+
+                bubble.className = " thinking-bubble";
+                                    
+
+
+                bubble.innerHTML = `
+
+                    <div class="thinking-wrap">
+
+                        <span class="thinking-text">
+                            Thinking
+                        </span>
+
+                        <div class="thinking-dots">
+
+                            <span class="dot"></span>
+
+                            <span class="dot"></span>
+
+                            <span class="dot"></span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                row.appendChild(bubble);
+
+                chatInner.appendChild(row);
+
+
+                scrollToBottom();
+
+
+                return row;
+
+            }
+
+
+            /* =========================
+               ASK API
+            ========================= */
+
+            async function ask(question) {
+
+                sendBtn.disabled = true;
+
+
+                /* Remove welcome screen */
+
+                if (emptyState.parentNode) {
+
+                    emptyState.remove();
+
+                }
+
+
+                /* User message */
+
+                addRow(
+                    question,
+                    "user"
+                );
+
+
+                /* Thinking */
+
+                const thinking =
+                    addThinking();
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_BASE_URL}/chat`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    question: question
+                                })
+                            }
+                        );
+
+
+                    /* Remove thinking */
+
+                    thinking.remove();
+
+
+                    if (!response.ok) {
+
+                        let errorMessage =
+                            "Something went wrong.";
+
+                        try {
+
+                            const errorData =
+                                await response.json();
+
+                            errorMessage =
+                                errorData.detail ||
+                                errorMessage;
+
+                        } catch (_) {}
+
+                        addRow(
+                            errorMessage,
+                            "ai",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    const answer =
+                        data.answer ||
+                        "I don't have enough information to answer that.";
+
+
+                    addRow(
+                        answer,
+                        "ai"
+                    );
+
+
+                } catch (error) {
+
+                    thinking.remove();
+
+
+                    addRow(
+                        "Unable to connect to the AI server. Make sure your FastAPI backend is running on http://localhost:8000.",
+                        "ai",
+                        "error"
+                    );
+
+                    console.error(
+                        "API Error:",
+                        error
+                    );
+
+                } finally {
+
+                    sendBtn.disabled = false;
+
+                    input.focus();
+
+                }
+
+            }
+
+
+            /* =========================
+               FORM SUBMIT
+            ========================= */
+
+            form.addEventListener(
+                "submit",
+                (event) => {
+
+                    event.preventDefault();
+
+
+                    const question =
+                        input.value.trim();
+
+
+                    if (!question) {
+                        return;
+                    }
+
+
+                    input.value = "";
+
+                    autoResize();
+
+
+                    ask(question);
+
+                }
+            );
+
+
+            /* Initial focus */
+
+            input.focus();
+
+        })();
+
+    </script>
+
+</body>
+
+</html>
