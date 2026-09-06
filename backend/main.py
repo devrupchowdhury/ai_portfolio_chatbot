@@ -30,6 +30,16 @@ ALLOWED_ORIGINS = [
     for origin in os.getenv("ALLOWED_ORIGINS", "*").split(",")
     if origin.strip()
 ]
+# Matches your stable domain (devrupchowdhury.vercel.app) AND any of
+# Vercel's auto-generated preview deployment URLs for the same project
+# (e.g. devrupchowdhury-7k1wx9sld-devrups-projects.vercel.app), so you
+# don't have to update ALLOWED_ORIGINS every time Vercel creates a new
+# preview URL. Override via the ALLOWED_ORIGIN_REGEX env var if your
+# Vercel project name differs.
+ALLOWED_ORIGIN_REGEX = os.getenv(
+    "ALLOWED_ORIGIN_REGEX",
+    r"^https://devrupchowdhury(-[a-zA-Z0-9]+)*\.vercel\.app$",
+)
 
 if not GROQ_API_KEY:
     raise RuntimeError(
@@ -43,6 +53,7 @@ app = FastAPI(title="Ask My AI", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=ALLOWED_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
